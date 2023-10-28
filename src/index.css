@@ -17,13 +17,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary: #F35D1C;
+    --primary: #282c34;
     --primary-text: #f9fafb;
     --secondary-text: #f3f4f6;
     --tertiary-text: #e5e7eb;
     --secondary-background: #0f172a;
     --bubbles-background: #374151;
-    --bubbles-mine-background: #F35D1C;
+    --bubbles-mine-background: #FF69B4;
   }
 }
 

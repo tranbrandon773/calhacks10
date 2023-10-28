@@ -57,3 +57,9 @@
     color: transparent; /* Makes the text transparent to show the background gradient */
     font-size: 1.2em; /* Makes the font size smaller compared to h2 */
 }
+h4 {
+  background-image: linear-gradient(to right, #FFC0CB, #FF69B4);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 1.3em;
+}

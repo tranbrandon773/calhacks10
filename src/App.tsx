@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
-import { faker } from "@faker-js/faker";
 import { Outlet, Link } from "react-router-dom";
 // For demo purposes. In a real app, you'd have real user data.
 const NAME = "Chicky";

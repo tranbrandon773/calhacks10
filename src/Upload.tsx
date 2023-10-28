@@ -3,6 +3,7 @@ import { pdfjs, Document } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import './Upload.css';
 import logo from './logo.svg';
+import { Outlet, Link } from "react-router-dom";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 let extractedTextGlobal = '';
@@ -36,8 +37,7 @@ const Upload = () => {
         <div>
           <h1>Welcome to </h1> 
           <h2>ChickyAI</h2>
-          <p>Translating medical jargon to everyday language, one report at a time.
-          .</p>
+          <p>Translating medical jargon to everyday language, one report at a time.</p>
         </div>
         <input type="file" accept=".pdf" onChange={handleFileChange} />
         {file && (
@@ -48,7 +48,7 @@ const Upload = () => {
         )}
         {text && (
           <div>
-            <h3>Success!</h3>
+            <Link to={`/chat`}><h4>Click to talk with your medical report!</h4></Link>
           </div>
         )}
       </header>
