@@ -8,27 +8,43 @@ export const createSeedMessage = action({
   args: { extractedText: v.string() },
   handler: async (ctx, args) => {
     // implementation goes here
-    const apiKey = process.env.OPENAI_API_KEY!;
-    const openai = new OpenAI({ apiKey });
 
-    const prompt = "You are empathetic and responding to questions your long-time friend has about their medical report. You give succint responses but are open to explaining more if the user asks you to elaborate. Your friend is anxious about the healthcare system and so do not give information with too much medical jargon."+"Attached is my diagnosis, please give me a succinet summary and give me a few example questions I can ask to probe into the medical report deeper, like ask about recommendations on how to improve my medical wellbeing and health conditions, or ask about what my numbers and measurements were, or ask about next steps according to the doctor." + args.extractedText
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // "gpt-4" also works, but is so slow!
-      // stream: true,
-      messages: [
-        {
-          role: "system",
-          content: "You are empathetic and responding to questions your long-time friend has about their medical report. You give succint responses but are open to explaining more if the user asks you to elaborate. Your friend is anxious about the healthcare system and so do not give information with too much medical jargon.",
-        },
-        {
-          role: "user",
-          content: prompt
+    try {
+      const apiKey = process.env.OPENAI_API_KEY!;
+      const openai = new OpenAI({ apiKey });
+
+      const prompt = "Attached is my diagnosis, please give me a succinet summary and give me a few example questions I can ask to probe into the medical report deeper, like ask about recommendations on how to improve my medical wellbeing and health conditions, or ask about what my numbers and measurements were, or ask about next steps according to the doctor." + args.extractedText
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo", // "gpt-4" also works, but is so slow!
+        // stream: true,
+        messages: [
+          {
+            role: "system",
+            content: "You are empathetic and responding to questions your long-time friend has about their medical report. You give succint responses but are open to explaining more if the user asks you to elaborate. Your friend is anxious about the healthcare system and so do not give information with too much medical jargon.",
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+      });
+      const seedMessage = completion.choices[0].message.content!
+      // console.log(seedMessage)
+      await ctx.runMutation(internal.init.seed, { seedMessage })
+      } catch (e) {
+        if (e instanceof OpenAI.APIError) {
+          console.error(e.status);
+          console.error(e.message);
+          // await ctx.runMutation(internal.messages.update, {
+          //   messageId,
+          //   body: "OpenAI call failed: " + e.message,
+          // });
+          console.error(e);
+        } else {
+          throw e;
         }
-      ],
-    });
-    const seedMessage = completion.choices[0].message.content!
-    console.log(seedMessage)
-    await ctx.runMutation(internal.init.seed, { seedMessage })
+      }
+    
   },
 });
 

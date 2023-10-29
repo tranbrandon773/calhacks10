@@ -1,6 +1,6 @@
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
     <g transform="translate(200,200)">
-        <g stroke="#FFC0CB" fill="none" stroke-width="2">
+        <g stroke="#FF69B4" fill="none" stroke-width="2">
             <path d="M0,0 Q50,-50 0,-100 Q-50,-50 0,0 Z" />
             <path d="M0,0 Q50,-50 0,-100 Q-50,-50 0,0 Z" transform="rotate(36)" /> <!--Kevin-->
             <path d="M0,0 Q50,-50 0,-100 Q-50,-50 0,0 Z" transform="rotate(72)" /> <!--Kerry-->

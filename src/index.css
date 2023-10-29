@@ -3,16 +3,17 @@
 }
 
 :root {
-  --primary: #F35D1C;
-  --primary-text: #111827;
-  --secondary-text: #374151;
-  --tertiary-text: #4b5563;
-  --secondary-background: #f3f4f6;
-  --bubbles-background: white;
-  --bubbles-mine-background: #F35D1C;
-  --focus-ring: #3b82f680;
-
-  color-scheme: light dark;
+  --primary: #ffffff;
+  --primary-text: #000000;
+  --secondary-text: #606060;
+  --tertiary-text: #a0a0a0;
+  --secondary-background: #f0f0f0;
+  --bubbles-background: #e0e0e0;
+  --bubbles-mine-background: #FF69B4;
+  --focus-ring: #007bff80;  
+  --link-color: #007bff;
+  
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,8 +22,8 @@
     --primary-text: #f9fafb;
     --secondary-text: #f3f4f6;
     --tertiary-text: #e5e7eb;
-    --secondary-background: #0f172a;
-    --bubbles-background: #374151;
+    --secondary-background: #1c1c1e;
+    --bubbles-background: #2c2c2e;
     --bubbles-mine-background: #FF69B4;
   }
 }
@@ -152,6 +153,7 @@ body {
   padding-right: calc(16px + 10vw);
   animation: 0.15s ease-in-out message;
   box-sizing: content-box;
+  margin-bottom: 80px;
 }
 
 @media (prefers-reduced-motion) {
@@ -179,7 +181,7 @@ body {
 }
 
 .chat article p {
-  color: var(--secondary-text);
+  color: var(--primary-text);
   background-color: var(--bubbles-background);
   margin-bottom: 1em;
   padding: 20px;
@@ -210,7 +212,7 @@ body {
   border-radius: 16px;
   border-bottom-right-radius: 0;
   background: var(--bubbles-mine-background);
-  color: white;
+  color: var(--primary-text);
   justify-self: end;
 }
 

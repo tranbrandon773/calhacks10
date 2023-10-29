@@ -12,26 +12,46 @@ export const summarizeChat = action({
     const openai = new OpenAI({ apiKey });
 
     const messages = await ctx.runQuery(api.messages.list)
-    const prompt = "You are empathetic and responding to questions your long-time friend has about their medical report. You give succint responses but are open to explaining more if the user asks you to elaborate. Your friend is anxious about the healthcare system and so do not give information with too much medical jargon. Please summarize the following conversatin about my health in 3 to 5 bullet points." 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // "gpt-4" also works, but is so slow!
-      // stream: true,
-      messages: [
-        {
-          role: "system",
-          content: "You are empathetic and responding to questions your long-time friend has about their medical report. You give succint responses but are open to explaining more if the user asks you to elaborate. Your friend is anxious about the healthcare system and so do not give information with too much medical jargon. Please summarize the following conversatin about my health in 3 to 5 bullet points.",
-        },
-        ...messages.map(({ body, author }) => ({
-          role:
-            author === "ChatGPT" ? ("assistant" as const) : ("user" as const),
-          content: body,
-        })),
-      ],
-    });
-    const res = completion.choices[0].message.content
-    console.log(res)
+    console.log(messages)
+    // const prompt = "Please summarize the following conversation about my health in 3 to 5 bullet points." + history
+    // console.log(prompt)
+    // const history = messages.map(message => message.body).join(' ')
+    // const sysMess = history + "Please summarize the following conversation about my health in 3 to 5 bullet points."
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo", // "gpt-4" also works, but is so slow!
+        // stream: true,
+        messages: [
+          {
+            role: "system",
+            content: "You are a master doctor who can summarize any given conversation about a medical report etc into a around 5 bullet points"
+          },
+          ...messages.map(({ body, author }) => ({
+            role:
+              author === "ChatGPT" ? ("assistant" as const) : ("user" as const),
+            content: body,
+          })),
+        ],
+      });
+      const res: string  = completion.choices[0].message.content!
+      console.log(res)
+      return res
+    } catch (e) {
+      if (e instanceof OpenAI.APIError) {
+        console.error(e.status);
+        console.error(e.message);
+        // await ctx.runMutation(internal.messages.update, {
+        //   messageId,
+        //   body: "OpenAI call failed: " + e.message,
+        // });
+        console.error(e);
+      } else {
+        throw e;
+      }
+    } 
   },
 });
+
 export const list = query({
   handler: async (ctx): Promise<Doc<"messages">[]> => {
     // Grab the most recent messages.

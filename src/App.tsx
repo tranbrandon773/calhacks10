@@ -1,5 +1,5 @@
 import {useEffect , useState } from "react";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery, useAction } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { Outlet, Link, useLoaderData } from "react-router-dom";
 // import getExtractedText from "./Upload"
@@ -12,6 +12,7 @@ const NAME = "Chicky";
 // }
 export default function App() { 
   // const extractedText  = useLoaderData();
+  // const chatSummary = useAction(api.messages.summarizeChat)
   const messages = useQuery(api.messages.list);
   const sendMessage = useMutation(api.messages.send);
   const [newMessageText, setNewMessageText] = useState("");
@@ -49,6 +50,7 @@ export default function App() {
           e.preventDefault();
           await sendMessage({ body: newMessageText, author: NAME });
           setNewMessageText("");
+          // chatSummary();
         }}
       >
         <input

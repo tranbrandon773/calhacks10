@@ -51,7 +51,8 @@ const Upload = () => {
         )}
         {text && (
           <div>
-            <Link to={`/chat`}><h4>Click to talk with your medical report!</h4></Link>
+            <p> Press the button to chat with your medical report </p>
+            <Link to={`/chat`}><h4>Chat now!</h4></Link>
           </div>
         )}
       </header>

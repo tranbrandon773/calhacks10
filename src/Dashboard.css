@@ -1,5 +1,4 @@
-/* Dashboard.css */
-.dashboard-container {
+/* .dashboard-container {
     padding: 2rem;
     background-color: var(--secondary-background);
     height: 100vh;
@@ -18,6 +17,18 @@
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
+.dashboard-card ul {
+    list-style-type: none; 
+    padding-left: 0; 
+    text-align: left; 
+}
+
+.dashboard-card a {
+    font-size: 1.2em; 
+    text-decoration: none; 
+
+}
+
 .dashboard-card {
     border: 1px solid var(--secondary-text);
     border-radius: 8px;
@@ -26,9 +37,93 @@
     background-color: var(--bubbles-background);
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    min-height: 300px;
+    overflow: auto;
 }
 
 .dashboard-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 4px 6px 0 rgb(0 0 0 / 0.1), 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.dashboard-card h2 {
+    background-image: linear-gradient(to right, #FFC0CB, #FF8DA1);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 2em;
+} */
+:root {
+    --primary-background: #ffffff;
+    --secondary-background: #f0f0f0;
+    --primary-text: #000000;
+    --secondary-text: #606060;
+    --border-color: #e0e0e0;
+    --link-color: #007bff;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: var(--primary-background);
+    color: var(--primary-text);
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-container {
+    padding: 2rem;
+    background-color: var(--primary-background);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    width: 80%;
+    border-radius: 16px;
+}
+
+.dashboard-card {
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    background-color: var(--secondary-background);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    min-height: 300px;
+    overflow: auto;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-card h2 {
+    background-image: linear-gradient(to right, #FFFFFF, #FFFFFF);  /* Adjusted for dark mode */
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 1.5em;
+}
+
+.dashboard-card ul {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: left;
+}
+
+.dashboard-card a {
+    font-size: 1em;
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.dashboard-card a:hover {
+    color: lighten(var(--link-color), 10%);  /* Assumes a preprocessor like SASS or LESS. If using plain CSS, replace with a lighter shade of the link color */
 }
