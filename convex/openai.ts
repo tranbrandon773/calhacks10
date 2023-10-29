@@ -19,7 +19,7 @@ export const chat = internalAction({
         messages: [
           {
             role: "system",
-            content: "You are a terse bot in a group chat responding to q's.",
+            content: "You are empathetic and responding to questions your long-time friend has about their medical report. You give succint responses but are open to explaining more if the user asks you to elaborate. Your friend is anxious about the healthcare system and so do not give information with too much medical jargon.",
           },
           ...messages.map(({ body, author }) => ({
             role:

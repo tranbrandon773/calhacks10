@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import Upload from "./Upload";
+import Dashboard from "./Dashboard";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import {
   createBrowserRouter,
@@ -17,6 +18,11 @@ const router = createBrowserRouter([
   {
     path: "/chat",
     element: <App />,
+    // loader: chatLoader,
+  },
+  {
+    path: "/dash",
+    element: <Dashboard />,
   },
 ]);
 

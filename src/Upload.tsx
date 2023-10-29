@@ -5,12 +5,13 @@ import './Upload.css';
 import logo from './logo.svg';
 import { Outlet, Link } from "react-router-dom";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+import { api, internal } from "../convex/_generated/api";
+import { useAction } from "convex/react";
 
-let extractedTextGlobal = '';
 const Upload = () => {
   const [file, setFile] = useState<File | null>(null);
   const [text, setText] = useState<string | null>(null);
-
+  const createSeedMessage = useAction(api.init.createSeedMessage);
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files && event.target.files[0];
     setFile(selectedFile ? selectedFile : null);
@@ -24,8 +25,10 @@ const Upload = () => {
       extractedText += pageTextContent.items.map(item => item.str).join(' ');
     }
     setText(extractedText);
-    extractedTextGlobal = extractedText;
-    localStorage.setItem('extractedText', extractedText); 
+    console.log(extractedText)
+    createSeedMessage({ extractedText })
+    // extractedTextGlobal = extractedText;
+    // localStorage.setItem('extractedText', extractedText); 
   };
 
   return (
@@ -55,6 +58,4 @@ const Upload = () => {
     </div>
   );
 };
-
 export default Upload;
-  

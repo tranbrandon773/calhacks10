@@ -291,3 +291,14 @@ body {
 .chat button:disabled {
   opacity: 0.7;
 }
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+.chat-section,
+.notes-section {
+  flex: 1;
+  overflow-y: auto;
+}

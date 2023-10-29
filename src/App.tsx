@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
+import {useEffect , useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useLoaderData } from "react-router-dom";
+// import getExtractedText from "./Upload"
 // For demo purposes. In a real app, you'd have real user data.
 const NAME = "Chicky";
 
-export default function App() {
+// export async function loader() {
+//   const extractedText = await getExtractedText();
+//   return { extractedText };
+// }
+export default function App() { 
+  // const extractedText  = useLoaderData();
   const messages = useQuery(api.messages.list);
   const sendMessage = useMutation(api.messages.send);
   const [newMessageText, setNewMessageText] = useState("");
@@ -13,18 +19,21 @@ export default function App() {
   useEffect(() => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   }, [messages]);
-  useEffect(() => {
-    const text = localStorage.getItem('extractedText');  // Get extractedText from local storage
-    console.log(text)
-    // if (text) setExtractedText(text);
-  }, []);
+
+  // useEffect(() => {
+  //   const text = localStorage.getItem('extractedText'); 
+  //   console.log(text)
+  //   // if (text) setExtractedText(text);
+  // }, []);
+  
   return (
-    <main className="chat">
+  <section className="chat">
       <header>
         <h1>ChickyAI Cat</h1>
         <p>
           Connected as <strong>{NAME}</strong>
         </p>
+
       </header>
       {messages?.map((message) => (
         <article
@@ -51,6 +60,8 @@ export default function App() {
           Send
         </button>
       </form>
-    </main>
+    </section>
   );
 }
+
+

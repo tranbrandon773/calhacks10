@@ -1,9 +1,41 @@
-import { api } from "./_generated/api";
-import { internalMutation } from "./_generated/server";
+import { api, internal } from "./_generated/api";
+import { OpenAI } from "openai";
+import { internalMutation, action } from "./_generated/server";
+import { ConvexHttpClient } from "convex/browser";
+import { v } from "convex/values";
 
-const seedMessages = [
-  ["ChatGPT", "Hardcoded test message", 0],
-] as const;
+export const createSeedMessage = action({
+  args: { extractedText: v.string() },
+  handler: async (ctx, args) => {
+    // implementation goes here
+    const apiKey = process.env.OPENAI_API_KEY!;
+    const openai = new OpenAI({ apiKey });
+
+    const prompt = "You are empathetic and responding to questions your long-time friend has about their medical report. You give succint responses but are open to explaining more if the user asks you to elaborate. Your friend is anxious about the healthcare system and so do not give information with too much medical jargon."+"Attached is my diagnosis, please give me a succinet summary and give me a few example questions I can ask to probe into the medical report deeper, like ask about recommendations on how to improve my medical wellbeing and health conditions, or ask about what my numbers and measurements were, or ask about next steps according to the doctor." + args.extractedText
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo", // "gpt-4" also works, but is so slow!
+      // stream: true,
+      messages: [
+        {
+          role: "system",
+          content: "You are empathetic and responding to questions your long-time friend has about their medical report. You give succint responses but are open to explaining more if the user asks you to elaborate. Your friend is anxious about the healthcare system and so do not give information with too much medical jargon.",
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+    });
+    const seedMessage = completion.choices[0].message.content!
+    console.log(seedMessage)
+    await ctx.runMutation(internal.init.seed, { seedMessage })
+  },
+});
+
+
+// const seedMessages = [
+//   ["ChatGPT", seedMessage === null ? "seedMessage is null" : seedMessage, 0],
+// ] as const;
 
 if (!process.env.OPENAI_API_KEY) {
   const deploymentName = process.env.CONVEX_CLOUD_URL?.slice(8).replace(
@@ -18,22 +50,27 @@ if (!process.env.OPENAI_API_KEY) {
 }
 
 export const seed = internalMutation({
-  handler: async (ctx) => {
-    let totalDelay = 0;
-    for (const [author, body, delay] of seedMessages) {
-      totalDelay += delay;
-      await ctx.scheduler.runAfter(totalDelay, api.messages.send, {
-        author,
-        body,
-      });
-    }
+  args: {seedMessage: v.string()},
+  handler: async (ctx, args) => {
+    await ctx.db.insert("messages", {
+      author: "ChatGPT",
+      body: args.seedMessage,
+    });
+    // let totalDelay =0;
+    // for (const [author, body, delay] of seedMessages) {
+    //   totalDelay += de lay;
+    //   await ctx.scheduler.runAfter(totalDelay, api.messages.send, {
+    //     author,
+    //     body,
+    //   });
+    // }
   },
 });
 
 export default internalMutation({
   handler: async (ctx) => {
-    const anyMessage = await ctx.db.query("messages").first();
-    if (anyMessage) return;
-    await seed(ctx, {});
+    // const anyMessage = await ctx.db.query("messages").first();
+    // if (anyMessage) return;
+    // await seed(ctx, {});
   },
 });
