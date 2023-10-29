@@ -14,9 +14,13 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as crons from "../crons";
 import type * as init from "../init";
+import type * as lucia from "../lucia";
 import type * as messages from "../messages";
 import type * as openai from "../openai";
+import type * as users from "../users";
+import type * as withAuth from "../withAuth";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -27,9 +31,13 @@ import type * as openai from "../openai";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  crons: typeof crons;
   init: typeof init;
+  lucia: typeof lucia;
   messages: typeof messages;
   openai: typeof openai;
+  users: typeof users;
+  withAuth: typeof withAuth;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
