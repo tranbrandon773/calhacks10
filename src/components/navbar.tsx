@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import LanguageMenu from "./language_menu";
+import LogoutButton from "../LogoutButton";
 
 const Navbar = () => {
     return (
@@ -35,6 +36,9 @@ const Navbar = () => {
             <li>
                 <LanguageMenu />
             </li>
+            {/* <li>
+                <LogoutButton />
+            </li> */}
         </ul>
     );
 };
