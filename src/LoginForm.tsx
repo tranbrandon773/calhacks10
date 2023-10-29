@@ -3,6 +3,7 @@ import { useSetSessionId } from "./SessionProvider";
 import { useMutation } from "./usingSession";
 import { api } from "../convex/_generated/api";
 
+import logo from './logo.svg';
 export function LoginForm() {
   const setSessionId = useSetSessionId();
   const [flow, setFlow] = useState<"signIn" | "signUp">("signIn");
@@ -26,6 +27,10 @@ export function LoginForm() {
   };
   return (
     <form onSubmit={handleSubmit}>
+      <div className="logo-text">
+      <img src={logo} className="App-logo-login" alt="logo" />
+        <h1>ChickyAI</h1>
+      </div>
       <label htmlFor="username">Email</label>
       <input name="email" id="email" />
       <label htmlFor="password">Password</label>

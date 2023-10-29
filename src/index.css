@@ -303,10 +303,11 @@ body {
   /* adjust width as needed */
   width: 40%;
   padding: 10px;
-  margin-left:50px;
+  margin-left:30px;
   margin-top:20px;
   box-sizing: border-box;
   font-weight: 600; 
+  text-align: left;
 }
 
 .chat {
@@ -326,7 +327,7 @@ body {
   font-size: 1.5rem;
   margin-bottom: 20px;
   color: var(--primary-text);
-
+  text-align: left;
 }
 
 .instructions ul {
@@ -334,6 +335,8 @@ body {
   padding-left: 0;
   font-weight: 600;
   color: #FF69B4;
+
+  text-align: left;
 }
 
 .instructions li {
