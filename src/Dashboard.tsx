@@ -112,22 +112,8 @@ const [loadingKeyTerms, setLoadingKeyTerms] = useState(true); // New state for l
         <div className="dashboard-container">
             <Navbar />
             <div className="dashboard-grid">
-            <DashboardCard title="Chat Summary" content={`\n\n${chatSummary}`} />
-            <DashboardCard title="Key Terms" content={keyTermsContent} />
-                {/* <DashboardCard 
-                    title="Key Terms" 
-                    content={
-                        <div>
-                            <ul style={{ listStyleType: 'none', paddingLeft: '0', margin: '1rem 0' }}>
-                                <li><strong>PET myocardial perfusion imaging:</strong> A heart scan that measures blood flow in the heart.</li>
-                                <li><strong>Ischemia:</strong> A condition where the heart muscle doesn't get enough blood.</li>
-                                <li><strong>Global left ventricular systolic function:</strong> How well the main pumping chamber (left ventricle) of the heart contracts.</li>
-                                <li><strong>Electrocardiogram:</strong> A test that measures the electrical activity of the heart.</li>
-                                <li><strong>CT (Computed Tomography):</strong> A type of X-ray that gives detailed pictures of structures inside the body.</li>
-                            </ul>
-                        </div>
-                    }
-                /> */}
+                <DashboardCard title="Chat Summary" content={`\n\n${chatSummary}`} />
+                <DashboardCard title="Key Terms" content={keyTermsContent} />
                 <DashboardCard title="Public Health Resources" content={combinedHeartContent} />
             </div>
             <div className="powered-by">

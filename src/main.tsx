@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import Upload from "./Upload";
 import Dashboard from "./Dashboard";
-import Sandbox from "./Sandbox";
+// import Sandbox from "./Sandbox";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import {
   createBrowserRouter,
@@ -24,10 +24,10 @@ const router = createBrowserRouter([
     path: "/dash",
     element: <Dashboard />,
   },
-  {
-    path: "/dev",
-    element: <Sandbox />,
-  },  
+  // {
+  //   path: "/dev",
+  //   element: <Sandbox />,
+  // },  
 ]);
 
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL);
