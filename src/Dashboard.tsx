@@ -78,7 +78,7 @@ const combinedHeartContent = (
     <ul>
         {uniqueTopics.map((topic, index) => (
             <li key={index}>
-                <a href={topic.url} target="_blank" rel="noopener noreferrer" style={{ color: '#3299ff' }}>{topic.title}</a>
+                <a href={topic.url} target="_blank" rel="noopener noreferrer" style={{ color: '#3299ff', fontWeight: 600 }}>{topic.title}</a>
             </li>
         ))}
     </ul>
