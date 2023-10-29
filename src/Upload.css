@@ -66,6 +66,7 @@ h4 {
   color: transparent;
   font-size: 1.3em;
 } */
+
 .App {
   text-align: center;
 }
@@ -82,7 +83,7 @@ h4 {
 }
 
 .App-header {
-  background-color: #f0f0f0; /* Adjusted for light theme */
+  background-color: #ffffff; /* Adjusted for light theme */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -136,3 +137,33 @@ h4 {
   font-size: 1.3em;
 }
 
+.file-upload {
+  background-color: #FFC0CB; /* Pink background */
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 15px 25px;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  transition: background-color 0.3s ease;
+  overflow: hidden;
+  font-weight: 800;
+  margin-bottom: 100px;
+}
+
+.file-upload:hover {
+  background-color: #FF69B4; /* Slightly darker pink for hover */
+}
+
+.file-input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}

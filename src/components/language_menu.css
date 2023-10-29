@@ -1,0 +1,50 @@
+.language-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .selected-language {
+    cursor: pointer;
+    display: block;
+    padding: 10px 20px;
+    background-color: #f7f7f7;
+    border-radius: 0px;
+    text-decoration: none;
+    color: #FF69B4; /* Made text color pink to keep consistency */
+    font-weight: 700; /* Made text slightly bolder for emphasis */
+    transition: all 0.3s ease; /* Transition applies to all properties */
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1); /* Added subtle shadow for depth */
+  }
+  
+  .selected-language.open {
+    background-color: #FF69B4;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  }
+  
+  /* Position the language list absolutely and below the selected language */
+  .language-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%; /* Position it below the selected language */
+    left: 0;
+    border-top: none; /* Remove border at the top */
+    background-color: #f7f7f7;
+    text-decoration: none;
+    color: #FF69B4; /* Made text color pink to keep consistency */
+    font-weight: 700; /* Made text slightly bolder for emphasis */
+    transition: all 0.3s ease; /* Transition applies to all properties */
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1); /* Added subtle shadow for depth */
+  }
+  
+  .language-list li {
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .language-list li:hover {
+    background-color: #f0f0f0;
+  }
+  

@@ -14,19 +14,20 @@ export const chat = internalAction({
 
     try {
       const stream = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo", // "gpt-4" also works, but is so slow!
+        model: "gpt-3.5-turbo", 
         stream: true,
         messages: [
           {
             role: "system",
-            content: "You are empathetic and responding to questions your long-time friend has about their medical report. You give succint responses but are open to explaining more if the user asks you to elaborate. Your friend is anxious about the healthcare system and so do not give information with too much medical jargon.",
+            content: "You are empathetic and responding to questions your long-time friend has about their medical report. You give succint responses but are open to explaining more if the user asks you to elaborate. Your friend is anxious about the healthcare system and so do not give information with too much medical jargon. ",
           },
           ...messages.map(({ body, author }) => ({
             role:
-              author === "ChatGPT" ? ("assistant" as const) : ("user" as const),
+              author === "Dr. Pepe" ? ("assistant" as const) : ("user" as const),
             content: body,
           })),
         ],
+        max_tokens: 150,
       });
       let body = "";
       for await (const part of stream) {

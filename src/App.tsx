@@ -1,18 +1,11 @@
 import {useEffect , useState } from "react";
-import { useMutation, useQuery, useAction } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
-import { Outlet, Link, useLoaderData } from "react-router-dom";
-// import getExtractedText from "./Upload"
-// For demo purposes. In a real app, you'd have real user data.
+import Navbar from "./components/navbar";
+import './Dashboard.css';
 const NAME = "Chicky";
 
-// export async function loader() {
-//   const extractedText = await getExtractedText();
-//   return { extractedText };
-// }
 export default function App() { 
-  // const extractedText  = useLoaderData();
-  // const chatSummary = useAction(api.messages.summarizeChat)
   const messages = useQuery(api.messages.list);
   const sendMessage = useMutation(api.messages.send);
   const [newMessageText, setNewMessageText] = useState("");
@@ -21,21 +14,23 @@ export default function App() {
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   }, [messages]);
 
-  // useEffect(() => {
-  //   const text = localStorage.getItem('extractedText'); 
-  //   console.log(text)
-  //   // if (text) setExtractedText(text);
-  // }, []);
-  
   return (
-  <section className="chat">
-      <header>
-        <h1>ChickyAI Cat</h1>
-        <p>
-          Connected as <strong>{NAME}</strong>
-        </p>
+<div className="app">
 
-      </header>
+<Navbar />
+  <div className="wrapper">
+    
+    <section className="instructions">
+    <h2>How to Use ChickyAI Chat</h2>
+<p>Welcome to ChickyAI chat assistance! This chatbot is designed to help you understand your medical report better. Here's how to make the most of it:</p>
+<ul>
+    <li>For clarity on medical terms, simply ask "What does [term] mean?"</li>
+    <li>If there are parts of the physician's opinion you don't understand, ask for a simpler explanation.</li>
+    <li>For insights on next steps or any related health topics, let the chatbot know what you're looking for.</li>
+</ul>
+<p>Remember, while ChickyAI provides guidance and explanations, always consult with a healthcare professional for any serious concerns or decisions.</p>
+    </section>
+    <section className="chat">
       {messages?.map((message) => (
         <article
           key={message._id}
@@ -50,7 +45,6 @@ export default function App() {
           e.preventDefault();
           await sendMessage({ body: newMessageText, author: NAME });
           setNewMessageText("");
-          // chatSummary();
         }}
       >
         <input
@@ -63,6 +57,8 @@ export default function App() {
         </button>
       </form>
     </section>
+  </div>
+</div>
   );
 }
 

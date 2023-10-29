@@ -1,0 +1,41 @@
+#navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Align items to the center vertically */
+}
+
+li {
+    margin: 0px; /* Increased spacing a bit for better visual separation */
+}
+
+.inactive {
+    display: block;
+    padding: 10px 20px;
+    background-color: #f7f7f7;
+    border-radius: 0px;
+    text-decoration: none;
+    color: #FF69B4; /* Made text color pink to keep consistency */
+    font-weight: 700; /* Made text slightly bolder for emphasis */
+    transition: all 0.3s ease; /* Transition applies to all properties */
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1); /* Added subtle shadow for depth */
+}
+
+.inactive:hover {
+    background-color: #FF69B4;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Active and pending states styles */
+.active {
+    background-color: #FFC0CB;
+    color: #fff;
+}
+
+.pending {
+    background-color: #FFE0E5; /* Slightly lighter pink for pending */
+    color: #FFC0CB;
+}

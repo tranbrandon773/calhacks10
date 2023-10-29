@@ -52,13 +52,15 @@
     color: transparent;
     font-size: 2em;
 } */
+
 :root {
     --primary-background: #ffffff;
-    --secondary-background: #f0f0f0;
-    --primary-text: #000000;
-    --secondary-text: #606060;
-    --border-color: #e0e0e0;
+    --secondary-background: #f7f7f7;
+    --primary-text: #1d1d1f;
+    --secondary-text: #8e8e93;
+    --border-color: #e5e5ea;
     --link-color: #007bff;
+    --highlight-color: #FF69B4;
 }
 
 body {
@@ -67,47 +69,45 @@ body {
     color: var(--primary-text);
     margin: 0;
     padding: 0;
+    line-height: 1.2;
 }
 
 .dashboard-container {
-    padding: 2rem;
-    background-color: var(--primary-background);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding-top: 0px; /* Accommodate the height of the fixed navbar */
 }
 
 .dashboard-grid {
+    max-width: 1200px; /* Limiting width for better readability */
+    margin: 0 auto; /* Center the content */
+    gap: 20px; /* Space between cards */
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    width: 80%;
-    border-radius: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
+
 .dashboard-card {
+    margin-top: 80px;
     border: 1px solid var(--border-color);
-    border-radius: 16px;
+    border-radius: 12px;
     padding: 2rem;
     text-align: center;
     background-color: var(--secondary-background);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    min-height: 300px;
-    overflow: auto;
+    min-height: 250px;
+    white-space: pre-line;
+    max-height: 350px;  /* Adjust this value based on the desired maximum height */
+    overflow-y: auto;  /* Allows vertical scrolling when the content exceeds the max height */
 }
 
 .dashboard-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .dashboard-card h2 {
-    background-image: linear-gradient(to right, #FFFFFF, #FFFFFF);  /* Adjusted for dark mode */
-    -webkit-background-clip: text;
-    color: transparent;
+    color: var(--highlight-color);
+    font-weight: 600;
     font-size: 1.5em;
 }
 
@@ -118,12 +118,43 @@ body {
 }
 
 .dashboard-card a {
-    font-size: 1em;
-    color: var(--link-color);
+    font-size: 0.9em;
+    color: var(--highlight-color);
     text-decoration: none;
     transition: color 0.3s ease-in-out;
 }
 
 .dashboard-card a:hover {
-    color: lighten(var(--link-color), 10%);  /* Assumes a preprocessor like SASS or LESS. If using plain CSS, replace with a lighter shade of the link color */
+    color: var(--primary-text);
+}
+.dashboard-card h3 {
+    color: black;
+    font-weight: 600;
+    font-size: 1.2em;
+}
+.powered-by {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+.powered-by-chat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+}
+
+
+.powered-logo {
+    width: 40px; /* Adjust as necessary */
+    height: 40px; /* Adjust as necessary */
+    margin-left: -5px; /* Adjust to space it out from the text */
+}
+
+/* Retaining the animation from App-logo */
+@media (prefers-reduced-motion: no-preference) {
+    .powered-logo.App-logo {
+        animation: App-logo-spin infinite 10s linear;
+    }
 }

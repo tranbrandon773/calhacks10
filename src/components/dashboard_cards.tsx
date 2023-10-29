@@ -1,5 +1,10 @@
-export default function dashboard_cards() {
-    return(
-        <p>Dashboard Cards rweygiefwihuefw</p>
+const DashboardCard = ({ title, content }) => {
+    return (
+        <div className="dashboard-card">
+            <h2>{title}</h2>
+            {content}
+        </div>
     );
-}
+};
+
+export default DashboardCard

@@ -1,49 +1,42 @@
 import { api, internal } from "./_generated/api";
-import { internalMutation, mutation, action } from "./_generated/server";
-import { query } from "./_generated/server";
-import { Doc, Id } from "./_generated/dataModel";
+import { internalMutation, mutation, action, query } from "./_generated/server";
+import { Doc } from "./_generated/dataModel";
 import { v } from "convex/values";
 import { OpenAI } from "openai";
 
 export const summarizeChat = action({
   handler: async (ctx) => {
-    // implementation goes here
     const apiKey = process.env.OPENAI_API_KEY!;
     const openai = new OpenAI({ apiKey });
 
     const messages = await ctx.runQuery(api.messages.list)
-    console.log(messages)
-    // const prompt = "Please summarize the following conversation about my health in 3 to 5 bullet points." + history
-    // console.log(prompt)
-    // const history = messages.map(message => message.body).join(' ')
-    // const sysMess = history + "Please summarize the following conversation about my health in 3 to 5 bullet points."
+    const prompt = "Please give a summary in 3 to 5 bullet points about the conversation we just had, specifically what the main takeaways for me are."
     try {
       const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo", // "gpt-4" also works, but is so slow!
-        // stream: true,
+        model: "gpt-3.5-turbo", 
         messages: [
           {
             role: "system",
-            content: "You are a master doctor who can summarize any given conversation about a medical report etc into a around 5 bullet points"
+            content: "You are empathetic and responding to questions your long-time friend has about their medical report. You give succint responses but are open to explaining more if the user asks you to elaborate. Your friend is anxious about the healthcare system and so do not give information with too much medical jargon.",
           },
           ...messages.map(({ body, author }) => ({
             role:
-              author === "ChatGPT" ? ("assistant" as const) : ("user" as const),
+              author === "Dr. Pepe" ? ("assistant" as const) : ("user" as const),
             content: body,
           })),
+          {
+            role: "user",
+            content: prompt,
+          }
         ],
+        max_tokens: 220
       });
       const res: string  = completion.choices[0].message.content!
-      console.log(res)
       return res
     } catch (e) {
       if (e instanceof OpenAI.APIError) {
         console.error(e.status);
         console.error(e.message);
-        // await ctx.runMutation(internal.messages.update, {
-        //   messageId,
-        //   body: "OpenAI call failed: " + e.message,
-        // });
         console.error(e);
       } else {
         throw e;
@@ -67,7 +60,7 @@ export const send = mutation({
     // Send our message.
     await ctx.db.insert("messages", { body, author });
 
-    if (author !== "ChatGPT") {
+    if (author !== "Dr. Pepe") {
       // Fetch the latest n messages to send as context.
       // The default order is by creation time.
       const messages = await ctx.db.query("messages").order("desc").take(10);
@@ -75,7 +68,7 @@ export const send = mutation({
       messages.reverse();
       // Insert a message with a placeholder body.
       const messageId = await ctx.db.insert("messages", {
-        author: "ChatGPT",
+        author: "Dr. Pepe",
         body: "...",
       });
       // Schedule an action that calls ChatGPT and updates the message.

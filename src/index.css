@@ -23,7 +23,7 @@
     --secondary-text: #f3f4f6;
     --tertiary-text: #e5e7eb;
     --secondary-background: #1c1c1e;
-    --bubbles-background: #2c2c2e;
+    --bubbles-background: #f7f7f7;
     --bubbles-mine-background: #FF69B4;
   }
 }
@@ -41,46 +41,30 @@ body {
   background-color: var(--secondary-background);
 
   padding-top: 96px;
-  padding-bottom: 72px;
+  padding-bottom: 92px;
 }
 
 .chat header {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-
+  top: 39px;
+  left: 620px;
+  width: 47%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background: #ffffff;
   gap: 4px;
-  background: var(--primary);
-  color: white;
+  color: var(--primary-text);
   text-align: center;
-  height: 75px;
+  height: 96px;
+  z-index: 1000;
 }
 
+/* Remove unnecessary styles */
 .chat header::before,
 .chat header::after {
-  display: block;
-  content: "";
-  position: absolute;
-  top: 75px;
-  box-shadow: 0 -40px 0 0 var(--primary);
-  pointer-events: none;
-  width: 40px;
-  height: 80px;
-}
-
-.chat header::before {
-  left: 0;
-  border-top-left-radius: 40px;
-}
-
-.chat header::after {
-  right: 0;
-  border-top-right-radius: 40px;
+  display: none;
 }
 
 .chat header h1 {
@@ -103,7 +87,6 @@ body {
   top: 20%;
   left: 0;
   display: inline-block;
-
   content: "";
   width: 0.7em;
   height: 0.7em;
@@ -111,7 +94,6 @@ body {
   background-color: #81e18c;
   border-radius: 50%;
   margin-bottom: 1px;
-
   animation: pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
@@ -136,6 +118,7 @@ body {
 .chat header p strong {
   font-weight: 500;
 }
+
 .chat header p input {
   font-weight: 500;
   margin: 0;
@@ -143,6 +126,7 @@ body {
   width: 100px;
   border-radius: 0;
 }
+
 
 .chat article {
   display: grid;
@@ -183,9 +167,8 @@ body {
 .chat article p {
   color: var(--primary-text);
   background-color: var(--bubbles-background);
-  margin-bottom: 1em;
   padding: 20px;
-  margin: 0.5em 0;
+  margin: 0.05em 0;
   border-radius: 16px;
   border-bottom-left-radius: 0;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -218,9 +201,9 @@ body {
 
 .chat form {
   position: fixed;
-  bottom: 8px;
-  left: 8px;
-  width: calc(100% - 16px);
+  bottom: 48px;
+  left: 640px;
+  width: calc(45% - 16px);
   height: 72px;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
@@ -233,7 +216,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
   .chat form {
-    background-color: rgba(55, 65, 81, 0.8);
+    background-color: f7f7f7;
   }
 }
 
@@ -242,9 +225,9 @@ body {
   width: 100%;
   border: 0;
   background: transparent;
-  font-size: 18px;
-  padding-left: 20px;
-  padding-right: 72px;
+  font-size: 16px;
+  padding-left: 15px;
+  padding-right: 67px;
   font-family: inherit;
   border: 3px solid transparent;
   border-radius: 16px;
@@ -265,6 +248,7 @@ body {
 }
 
 .chat input:focus {
+  color: #111827;
   outline: 0;
   border-color: var(--focus-ring);
 }
@@ -282,8 +266,7 @@ body {
   color: white;
   font-size: 0;
   transition: 0.15s ease-in-out opacity;
-
-  background-color: var(--primary);
+  background-color: #FF69B4;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='white' %3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5' /%3E%3C/svg%3E%0A");
   background-size: 24px;
   background-repeat: no-repeat;
@@ -294,13 +277,58 @@ body {
   opacity: 0.7;
 }
 
-.app {
-  display: flex;
-  height: 100vh;
-}
 
 .chat-section,
 .notes-section {
   flex: 1;
   overflow-y: auto;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.instructions {
+  /* adjust width as needed */
+  width: 40%;
+  padding: 10px;
+  margin-left:50px;
+  margin-top:20px;
+  box-sizing: border-box;
+}
+
+.chat {
+  width: 70%;
+  height: 650px; /* fixed height */
+  padding: 60px 30px 70px 30px; /* added padding-bottom for consistency */
+  box-sizing: border-box;
+  overflow-y: auto; /* allows vertical scrolling */
+  position: relative; 
+  margin-right: 100px;
+}
+
+
+
+.instructions h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--primary-text);
+}
+
+.instructions ul {
+  list-style-type: none;
+  padding-left: 0;
+  color: var(--secondary-text);
+}
+
+.instructions li {
+  margin-bottom: 10px;
 }

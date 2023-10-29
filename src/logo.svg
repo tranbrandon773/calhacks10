@@ -1,6 +1,12 @@
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient id="radial-gradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFC0CB" />
+            <stop offset="100%" stop-color="#FF69B4" />
+        </radialGradient>
+    </defs>
     <g transform="translate(200,200)">
-        <g stroke="#FF69B4" fill="none" stroke-width="2">
+        <g stroke="#FF69B4" fill="url(#radial-gradient)" stroke-width="2">
             <path d="M0,0 Q50,-50 0,-100 Q-50,-50 0,0 Z" />
             <path d="M0,0 Q50,-50 0,-100 Q-50,-50 0,0 Z" transform="rotate(36)" /> <!--Kevin-->
             <path d="M0,0 Q50,-50 0,-100 Q-50,-50 0,0 Z" transform="rotate(72)" /> <!--Kerry-->
