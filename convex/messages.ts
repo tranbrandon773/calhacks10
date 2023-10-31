@@ -10,7 +10,7 @@ export const summarizeChat = action({
     const openai = new OpenAI({ apiKey });
 
     const messages = await ctx.runQuery(api.messages.list)
-    const prompt = "Please give a summary in 3 to 5 bullet points about the conversation we just had, specifically what the main takeaways for me are. Immediatley start to list them, do not add any other text other than the list. Always provide left-justified text and always use numbered list."
+    const prompt = "Please give a summary in 3 to 5 bullet points about the conversation we just had, specifically what the main takeaways for me are. Immediatley start to list them, do not add any other text other than the list. Always provide left-justified text and always use numbered list. Do not add any extra text."
     try {
       const completion = await openai.chat.completions.create({
         model: "gpt-3.5-turbo", 

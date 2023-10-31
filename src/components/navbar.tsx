@@ -8,11 +8,11 @@ const Navbar = () => {
         <ul id="navbar">
             <li>
                 <NavLink  
-                    to="/"
+                    to="/upload"
                     activeClassName="active"
                     className="inactive"
                 >
-                    Home
+                    Upload
                 </NavLink>
             </li>
             <li>
